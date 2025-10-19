@@ -97,7 +97,11 @@
 
 @layer components {
   .metric-card {
-    @apply rounded-lg border border-border bg-card p-6 transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 hover:scale-102;
+    @apply rounded-lg border border-border bg-card p-6 transition-all duration-200 hover:shadow-lg hover:shadow-primary/20;
+  }
+
+  .metric-card:hover {
+    transform: scale(1.02);
   }
 
   .attack-button {
