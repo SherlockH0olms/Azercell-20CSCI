@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useState } from 'react';
 import { Play, Zap, AlertTriangle, Shield, Smartphone, Code } from 'lucide-react';
 
 interface AttackScenario {
