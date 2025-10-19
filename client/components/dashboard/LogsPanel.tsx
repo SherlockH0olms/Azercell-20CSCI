@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { useEffect, useRef, useState } from 'react';
 import { AlertCircle, Info, CheckCircle, AlertTriangle, XCircle } from 'lucide-react';
 
 type LogSeverity = 'BLOCKED' | 'CRITICAL' | 'WARNING' | 'INFO' | 'SUCCESS';

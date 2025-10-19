@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useEffect, useState } from 'react';
 import { CheckCircle, XCircle } from 'lucide-react';
 
 interface TimelineEvent {
