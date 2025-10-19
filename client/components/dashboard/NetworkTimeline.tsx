@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { CheckCircle, XCircle } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { CheckCircle, XCircle } from "lucide-react";
 
 interface TimelineEvent {
   timestamp: string;
-  type: 'success' | 'blocked';
+  type: "success" | "blocked";
 }
 
 interface NetworkTimelineProps {
@@ -16,13 +16,13 @@ function generateMockEvents(): TimelineEvent[] {
 
   for (let i = 29; i >= 0; i--) {
     const time = new Date(now.getTime() - i * 1000);
-    const type = Math.random() > 0.85 ? 'blocked' : 'success';
+    const type = Math.random() > 0.85 ? "blocked" : "success";
 
     events.push({
-      timestamp: time.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
+      timestamp: time.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
         hour12: false,
       }),
       type,
@@ -32,22 +32,26 @@ function generateMockEvents(): TimelineEvent[] {
   return events;
 }
 
-export default function NetworkTimeline({ events: initialEvents }: NetworkTimelineProps) {
-  const [events, setEvents] = useState<TimelineEvent[]>(initialEvents || generateMockEvents());
+export default function NetworkTimeline({
+  events: initialEvents,
+}: NetworkTimelineProps) {
+  const [events, setEvents] = useState<TimelineEvent[]>(
+    initialEvents || generateMockEvents(),
+  );
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setEvents((prevEvents) => {
         const newEvents = [...prevEvents];
-        const type = Math.random() > 0.85 ? 'blocked' : 'success';
+        const type = Math.random() > 0.85 ? "blocked" : "success";
 
         newEvents.shift(); // Remove oldest
         newEvents.push({
-          timestamp: new Date().toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
+          timestamp: new Date().toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
             hour12: false,
           }),
           type,
@@ -60,7 +64,7 @@ export default function NetworkTimeline({ events: initialEvents }: NetworkTimeli
     return () => clearInterval(interval);
   }, []);
 
-  const blockedCount = events.filter((e) => e.type === 'blocked').length;
+  const blockedCount = events.filter((e) => e.type === "blocked").length;
   const successCount = events.length - blockedCount;
 
   return (
@@ -77,11 +81,15 @@ export default function NetworkTimeline({ events: initialEvents }: NetworkTimeli
         <div className="flex gap-4 text-sm">
           <div className="flex items-center gap-2">
             <div className="h-3 w-3 rounded-sm bg-status-safe" />
-            <span className="text-muted-foreground">Success: {successCount}</span>
+            <span className="text-muted-foreground">
+              Success: {successCount}
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <div className="h-3 w-3 rounded-sm bg-status-critical" />
-            <span className="text-muted-foreground">Blocked: {blockedCount}</span>
+            <span className="text-muted-foreground">
+              Blocked: {blockedCount}
+            </span>
           </div>
         </div>
       </div>
@@ -98,9 +106,9 @@ export default function NetworkTimeline({ events: initialEvents }: NetworkTimeli
             >
               <div
                 className={`h-8 w-6 rounded-sm transition-all duration-200 ${
-                  event.type === 'success'
-                    ? 'bg-status-safe hover:bg-status-safe/80'
-                    : 'bg-status-critical hover:bg-status-critical/80'
+                  event.type === "success"
+                    ? "bg-status-safe hover:bg-status-safe/80"
+                    : "bg-status-critical hover:bg-status-critical/80"
                 }`}
               />
 
@@ -109,7 +117,9 @@ export default function NetworkTimeline({ events: initialEvents }: NetworkTimeli
                 <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 transform whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background font-medium z-10">
                   {event.timestamp}
                   <br />
-                  {event.type === 'success' ? 'Normal Traffic' : 'Attack Blocked'}
+                  {event.type === "success"
+                    ? "Normal Traffic"
+                    : "Attack Blocked"}
                   <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-foreground" />
                 </div>
               )}
@@ -119,9 +129,9 @@ export default function NetworkTimeline({ events: initialEvents }: NetworkTimeli
 
         {/* Timeline Labels */}
         <div className="flex justify-between text-xs text-muted-foreground font-mono">
-          <span>{events[0]?.timestamp || '00:00:00'}</span>
+          <span>{events[0]?.timestamp || "00:00:00"}</span>
           <span>Rolling timeline (newest on right)</span>
-          <span>{events[events.length - 1]?.timestamp || '00:00:00'}</span>
+          <span>{events[events.length - 1]?.timestamp || "00:00:00"}</span>
         </div>
       </div>
     </div>

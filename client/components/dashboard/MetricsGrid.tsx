@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Network,
   Shield,
@@ -6,7 +6,7 @@ import {
   AlertTriangle,
   Zap,
   TrendingUp,
-} from 'lucide-react';
+} from "lucide-react";
 
 interface Metric {
   id: string;
@@ -26,51 +26,51 @@ interface MetricsGridProps {
 
 const defaultMetrics: Metric[] = [
   {
-    id: 'requests',
-    label: 'Total Requests',
+    id: "requests",
+    label: "Total Requests",
     value: 1284567,
     icon: Network,
-    color: 'text-blue-400',
+    color: "text-blue-400",
     trend: { value: 12, isPositive: true },
   },
   {
-    id: 'blocked',
-    label: 'Blocked Attacks',
+    id: "blocked",
+    label: "Blocked Attacks",
     value: 342,
     icon: Shield,
-    color: 'text-status-critical',
+    color: "text-status-critical",
     trend: { value: 8, isPositive: false },
   },
   {
-    id: 'detection',
-    label: 'Detection Time (ms)',
+    id: "detection",
+    label: "Detection Time (ms)",
     value: 145,
     icon: Clock,
-    color: 'text-status-safe',
+    color: "text-status-safe",
     trend: { value: 23, isPositive: true },
   },
   {
-    id: 'threat',
-    label: 'Threat Level',
+    id: "threat",
+    label: "Threat Level",
     value: 62,
     icon: AlertTriangle,
-    color: 'text-status-normal',
+    color: "text-status-normal",
     trend: { value: 5, isPositive: false },
   },
   {
-    id: 'active',
-    label: 'Active Threats',
+    id: "active",
+    label: "Active Threats",
     value: 18,
     icon: Zap,
-    color: 'text-status-high',
+    color: "text-status-high",
     trend: { value: 3, isPositive: false },
   },
   {
-    id: 'health',
-    label: 'System Health',
+    id: "health",
+    label: "System Health",
     value: 98,
     icon: TrendingUp,
-    color: 'text-blue-300',
+    color: "text-blue-300",
     trend: { value: 2, isPositive: true },
   },
 ];
@@ -102,7 +102,9 @@ function AnimatedNumber({ value }: { value: number }) {
   return <span>{displayValue.toLocaleString()}</span>;
 }
 
-export default function MetricsGrid({ metrics = defaultMetrics }: MetricsGridProps) {
+export default function MetricsGrid({
+  metrics = defaultMetrics,
+}: MetricsGridProps) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {metrics.map((metric) => {
@@ -110,10 +112,7 @@ export default function MetricsGrid({ metrics = defaultMetrics }: MetricsGridPro
         const TrendIcon = metric.trend?.isPositive ? TrendingUp : TrendingUp;
 
         return (
-          <div
-            key={metric.id}
-            className="metric-card"
-          >
+          <div key={metric.id} className="metric-card">
             <div className="flex items-start justify-between mb-4">
               <div className={`rounded-lg bg-primary/10 p-3 ${metric.color}`}>
                 <Icon className="h-6 w-6" />
@@ -122,8 +121,8 @@ export default function MetricsGrid({ metrics = defaultMetrics }: MetricsGridPro
                 <div
                   className={`flex items-center gap-1 text-sm font-semibold ${
                     metric.trend.isPositive
-                      ? 'text-status-safe'
-                      : 'text-status-critical'
+                      ? "text-status-safe"
+                      : "text-status-critical"
                   }`}
                 >
                   <TrendIcon className="h-4 w-4" />

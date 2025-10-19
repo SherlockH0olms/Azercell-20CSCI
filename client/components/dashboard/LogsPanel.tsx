@@ -1,7 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
-import { AlertCircle, Info, CheckCircle, AlertTriangle, XCircle } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import {
+  AlertCircle,
+  Info,
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
+} from "lucide-react";
 
-type LogSeverity = 'BLOCKED' | 'CRITICAL' | 'WARNING' | 'INFO' | 'SUCCESS';
+type LogSeverity = "BLOCKED" | "CRITICAL" | "WARNING" | "INFO" | "SUCCESS";
 
 interface LogEntry {
   id: string;
@@ -17,49 +23,62 @@ interface LogsPanelProps {
   maxVisible?: number;
 }
 
-const severityConfig: Record<LogSeverity, { color: string; bgColor: string; icon: React.ComponentType<{ className?: string }> }> = {
+const severityConfig: Record<
+  LogSeverity,
+  {
+    color: string;
+    bgColor: string;
+    icon: React.ComponentType<{ className?: string }>;
+  }
+> = {
   BLOCKED: {
-    color: 'border-status-critical',
-    bgColor: 'bg-status-critical/5',
+    color: "border-status-critical",
+    bgColor: "bg-status-critical/5",
     icon: XCircle,
   },
   CRITICAL: {
-    color: 'border-status-high',
-    bgColor: 'bg-status-high/5',
+    color: "border-status-high",
+    bgColor: "bg-status-high/5",
     icon: AlertCircle,
   },
   WARNING: {
-    color: 'border-status-normal',
-    bgColor: 'bg-status-normal/5',
+    color: "border-status-normal",
+    bgColor: "bg-status-normal/5",
     icon: AlertTriangle,
   },
   INFO: {
-    color: 'border-blue-500',
-    bgColor: 'bg-blue-500/5',
+    color: "border-blue-500",
+    bgColor: "bg-blue-500/5",
     icon: Info,
   },
   SUCCESS: {
-    color: 'border-status-safe',
-    bgColor: 'bg-status-safe/5',
+    color: "border-status-safe",
+    bgColor: "bg-status-safe/5",
     icon: CheckCircle,
   },
 };
 
 function generateMockLogs(): LogEntry[] {
   const types = [
-    'SQL Injection Attempt',
-    'XSS Attack Detected',
-    'DDoS Wave Incoming',
-    'Credential Stuffing',
-    'Malware Signature Match',
-    'Suspicious Login',
-    'Rate Limit Exceeded',
-    'Invalid SSL Certificate',
-    'Bot Traffic Detected',
-    'Brute Force Attempt',
+    "SQL Injection Attempt",
+    "XSS Attack Detected",
+    "DDoS Wave Incoming",
+    "Credential Stuffing",
+    "Malware Signature Match",
+    "Suspicious Login",
+    "Rate Limit Exceeded",
+    "Invalid SSL Certificate",
+    "Bot Traffic Detected",
+    "Brute Force Attempt",
   ];
 
-  const severities: LogSeverity[] = ['BLOCKED', 'CRITICAL', 'WARNING', 'INFO', 'SUCCESS'];
+  const severities: LogSeverity[] = [
+    "BLOCKED",
+    "CRITICAL",
+    "WARNING",
+    "INFO",
+    "SUCCESS",
+  ];
 
   const logs: LogEntry[] = [];
   const now = new Date();
@@ -71,24 +90,29 @@ function generateMockLogs(): LogEntry[] {
 
     logs.push({
       id: `log-${i}`,
-      timestamp: time.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
+      timestamp: time.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
         hour12: false,
       }),
       type,
       severity,
       details: `Request from IP 192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)} - ${type.toLowerCase()}`,
-      additionalInfo: `Action: ${severity === 'BLOCKED' ? 'Blocked & Logged' : 'Monitored'}`,
+      additionalInfo: `Action: ${severity === "BLOCKED" ? "Blocked & Logged" : "Monitored"}`,
     });
   }
 
   return logs;
 }
 
-export default function LogsPanel({ logs: initialLogs, maxVisible = 20 }: LogsPanelProps) {
-  const [logs, setLogs] = useState<LogEntry[]>(initialLogs || generateMockLogs());
+export default function LogsPanel({
+  logs: initialLogs,
+  maxVisible = 20,
+}: LogsPanelProps) {
+  const [logs, setLogs] = useState<LogEntry[]>(
+    initialLogs || generateMockLogs(),
+  );
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -100,35 +124,42 @@ export default function LogsPanel({ logs: initialLogs, maxVisible = 20 }: LogsPa
   useEffect(() => {
     const interval = setInterval(() => {
       const types = [
-        'SQL Injection Attempt',
-        'XSS Attack Detected',
-        'DDoS Wave Incoming',
-        'Credential Stuffing',
-        'Malware Signature Match',
-        'Suspicious Login',
-        'Rate Limit Exceeded',
-        'Invalid SSL Certificate',
-        'Bot Traffic Detected',
-        'Brute Force Attempt',
+        "SQL Injection Attempt",
+        "XSS Attack Detected",
+        "DDoS Wave Incoming",
+        "Credential Stuffing",
+        "Malware Signature Match",
+        "Suspicious Login",
+        "Rate Limit Exceeded",
+        "Invalid SSL Certificate",
+        "Bot Traffic Detected",
+        "Brute Force Attempt",
       ];
 
-      const severities: LogSeverity[] = ['BLOCKED', 'CRITICAL', 'WARNING', 'INFO', 'SUCCESS'];
+      const severities: LogSeverity[] = [
+        "BLOCKED",
+        "CRITICAL",
+        "WARNING",
+        "INFO",
+        "SUCCESS",
+      ];
       const type = types[Math.floor(Math.random() * types.length)];
-      const severity = severities[Math.floor(Math.random() * severities.length)];
+      const severity =
+        severities[Math.floor(Math.random() * severities.length)];
       const now = new Date();
 
       const newLog: LogEntry = {
         id: `log-${Date.now()}`,
-        timestamp: now.toLocaleTimeString('en-US', {
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
+        timestamp: now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
           hour12: false,
         }),
         type,
         severity,
         details: `Request from IP 192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)} - ${type.toLowerCase()}`,
-        additionalInfo: `Action: ${severity === 'BLOCKED' ? 'Blocked & Logged' : 'Monitored'}`,
+        additionalInfo: `Action: ${severity === "BLOCKED" ? "Blocked & Logged" : "Monitored"}`,
       };
 
       setLogs((prevLogs) => {
@@ -166,7 +197,9 @@ export default function LogsPanel({ logs: initialLogs, maxVisible = 20 }: LogsPa
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
                     <span>[{log.timestamp}]</span>
-                    <span className="font-semibold text-foreground">{log.severity}</span>
+                    <span className="font-semibold text-foreground">
+                      {log.severity}
+                    </span>
                   </div>
 
                   <p className="mt-1 text-sm text-foreground truncate">

@@ -1,38 +1,38 @@
-import { useState, useCallback } from 'react';
-import Header from './Header';
-import MetricsGrid from './MetricsGrid';
-import AttackButtons from './AttackButtons';
-import NetworkTimeline from './NetworkTimeline';
-import LogsPanel from './LogsPanel';
-import Charts from './Charts';
+import { useState, useCallback } from "react";
+import Header from "./Header";
+import MetricsGrid from "./MetricsGrid";
+import AttackButtons from "./AttackButtons";
+import NetworkTimeline from "./NetworkTimeline";
+import LogsPanel from "./LogsPanel";
+import Charts from "./Charts";
 
-type ThreatLevel = 'CRITICAL' | 'HIGH' | 'NORMAL' | 'SAFE';
+type ThreatLevel = "CRITICAL" | "HIGH" | "NORMAL" | "SAFE";
 
 export default function Dashboard() {
-  const [threatLevel, setThreatLevel] = useState<ThreatLevel>('NORMAL');
+  const [threatLevel, setThreatLevel] = useState<ThreatLevel>("NORMAL");
 
   const handleAttackSelect = useCallback((attackId: string) => {
     // Simulate threat level changes based on attack
     const threatMap: Record<string, ThreatLevel> = {
-      demo: 'CRITICAL',
-      ddos: 'HIGH',
-      simswap: 'HIGH',
-      cred: 'NORMAL',
-      malware: 'CRITICAL',
-      custom: 'NORMAL',
+      demo: "CRITICAL",
+      ddos: "HIGH",
+      simswap: "HIGH",
+      cred: "NORMAL",
+      malware: "CRITICAL",
+      custom: "NORMAL",
     };
 
-    setThreatLevel(threatMap[attackId] || 'NORMAL');
+    setThreatLevel(threatMap[attackId] || "NORMAL");
 
     // Reset after 5 seconds
     setTimeout(() => {
-      setThreatLevel('NORMAL');
+      setThreatLevel("NORMAL");
     }, 5000);
   }, []);
 
   const handleRefresh = useCallback(() => {
     // Trigger dashboard refresh
-    console.log('Dashboard refreshed');
+    console.log("Dashboard refreshed");
   }, []);
 
   return (

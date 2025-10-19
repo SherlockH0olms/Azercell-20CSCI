@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
   PieChart,
   Pie,
@@ -11,7 +11,7 @@ import {
   Legend,
   ResponsiveContainer,
   Cell,
-} from 'recharts';
+} from "recharts";
 
 interface ChartsProps {
   attackStats?: Array<{ name: string; value: number }>;
@@ -19,10 +19,10 @@ interface ChartsProps {
 }
 
 const defaultAttackStats = [
-  { name: 'DDoS', value: 40 },
-  { name: 'Malware', value: 25 },
-  { name: 'SIM Swap', value: 20 },
-  { name: 'Other', value: 15 },
+  { name: "DDoS", value: 40 },
+  { name: "Malware", value: 25 },
+  { name: "SIM Swap", value: 20 },
+  { name: "Other", value: 15 },
 ];
 
 const defaultPerformanceData = [
@@ -39,10 +39,10 @@ const defaultPerformanceData = [
 ];
 
 const ATTACK_COLORS = [
-  '#EF4444', // Red - DDoS
-  '#F97316', // Orange - Malware
-  '#3B82F6', // Blue - SIM Swap
-  '#8B5CF6', // Purple - Other
+  "#EF4444", // Red - DDoS
+  "#F97316", // Orange - Malware
+  "#3B82F6", // Blue - SIM Swap
+  "#8B5CF6", // Purple - Other
 ];
 
 export default function Charts({
@@ -86,10 +86,10 @@ export default function Charts({
               </Pie>
               <Tooltip
                 contentStyle={{
-                  backgroundColor: 'hsl(var(--card))',
-                  border: '1px solid hsl(var(--border))',
-                  borderRadius: '0.5rem',
-                  color: 'hsl(var(--foreground))',
+                  backgroundColor: "hsl(var(--card))",
+                  border: "1px solid hsl(var(--border))",
+                  borderRadius: "0.5rem",
+                  color: "hsl(var(--foreground))",
                 }}
                 formatter={(value: number) => `${value}%`}
               />
@@ -99,17 +99,23 @@ export default function Charts({
 
         <div className="mt-6 space-y-2">
           {attackStats.map((stat, index) => (
-            <div key={stat.name} className="flex items-center justify-between text-sm">
+            <div
+              key={stat.name}
+              className="flex items-center justify-between text-sm"
+            >
               <div className="flex items-center gap-2">
                 <div
                   className="h-3 w-3 rounded-full"
                   style={{
-                    backgroundColor: ATTACK_COLORS[index % ATTACK_COLORS.length],
+                    backgroundColor:
+                      ATTACK_COLORS[index % ATTACK_COLORS.length],
                   }}
                 />
                 <span className="text-muted-foreground">{stat.name}</span>
               </div>
-              <span className="font-semibold text-foreground">{stat.value}%</span>
+              <span className="font-semibold text-foreground">
+                {stat.value}%
+              </span>
             </div>
           ))}
         </div>
@@ -130,16 +136,8 @@ export default function Charts({
             <LineChart data={performanceData}>
               <defs>
                 <linearGradient id="colorTime" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor="#3B82F6"
-                    stopOpacity={0.8}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor="#3B82F6"
-                    stopOpacity={0}
-                  />
+                  <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid
@@ -149,19 +147,19 @@ export default function Charts({
               <XAxis
                 dataKey="event"
                 stroke="hsl(var(--muted-foreground))"
-                style={{ fontSize: '12px' }}
+                style={{ fontSize: "12px" }}
               />
               <YAxis
                 stroke="hsl(var(--muted-foreground))"
-                style={{ fontSize: '12px' }}
-                label={{ value: 'ms', angle: -90, position: 'insideLeft' }}
+                style={{ fontSize: "12px" }}
+                label={{ value: "ms", angle: -90, position: "insideLeft" }}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: 'hsl(var(--card))',
-                  border: '1px solid hsl(var(--border))',
-                  borderRadius: '0.5rem',
-                  color: 'hsl(var(--foreground))',
+                  backgroundColor: "hsl(var(--card))",
+                  border: "1px solid hsl(var(--border))",
+                  borderRadius: "0.5rem",
+                  color: "hsl(var(--foreground))",
                 }}
                 formatter={(value: number) => `${value}ms`}
               />
@@ -170,7 +168,7 @@ export default function Charts({
                 dataKey="time"
                 stroke="#3B82F6"
                 strokeWidth={2}
-                dot={{ fill: '#3B82F6', r: 4 }}
+                dot={{ fill: "#3B82F6", r: 4 }}
                 activeDot={{ r: 6 }}
                 isAnimationActive={animateCharts}
                 animationDuration={800}
@@ -195,7 +193,7 @@ export default function Charts({
             <p className="font-semibold text-status-safe">
               {Math.round(
                 performanceData.reduce((a, b) => a + b.time, 0) /
-                  performanceData.length
+                  performanceData.length,
               )}
               ms
             </p>
